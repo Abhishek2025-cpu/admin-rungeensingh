@@ -1,28 +1,5 @@
 import axios from "axios";
-
-export const BASE_URL = "https://rungeenApp.ddns.net"
-
-
-// export const adminLogin = async (username, password) => {
-//   const basicAuth = btoa("Pearl:PearlProdChecker@12390"); 
-
-//   const response = await fetch(`${BASE_URL}/admin/login`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Basic ${basicAuth}`, 
-//     },
-//     body: JSON.stringify({username: username, password: password}),
-//   });
-
-//   console.log("my login res: ", response);
-
-//   if (!response.ok) {
-//     throw new Error("Login failed");
-//   }
-
-//   return response.json();
-// };
+import { BASE_URL } from "../base_url";
 
 export const adminLogin = async (username, password) => {
     const basicAuth = btoa("Pearl:PearlProdChecker@12390");
@@ -37,7 +14,7 @@ export const adminLogin = async (username, password) => {
         Authorization: `Basic ${basicAuth}`,
         },
 })
-console.log(rs);
+console.log(rs.status);
 return rs.data
     } catch (error) {
         console.log(error);

@@ -1,8 +1,7 @@
-// src/pages/InventoryList.jsx
-import React from 'react';
+import React from 'react'
 
-const InventoryList = () => {
-  // TODO: Replace dummy data with real API data
+const Viewbook = () => {
+    // TODO: Replace dummy data with real API data
   const books = [
     { id: 1, title: 'React Basics', enabled: true },
     { id: 2, title: 'Learning Tailwind', enabled: false },
@@ -63,6 +62,6 @@ const InventoryList = () => {
       </table>
     </div>
   );
-};
+}
 
-export default InventoryList;
+export default Viewbook

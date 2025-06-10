@@ -26,7 +26,7 @@ const Sidebar = () => {
       {/* Navigation Links */}
       <nav className="flex flex-col space-y-3">
         <NavLink
-          to="/dashboard"
+          to="/DashCompo"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           Dashboard
@@ -44,13 +44,13 @@ const Sidebar = () => {
           {currentOpen === 'category' && (
             <div className="ml-4 mt-2 space-y-2">
               <NavLink
-                to="/category/add"
+                to="/AddCategory"
                 className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
               >
                 Add New Category
               </NavLink>
               <NavLink
-                to="/category/view"
+                to="/ViewCategory"
                 className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
               >
                 View Category
@@ -71,13 +71,13 @@ const Sidebar = () => {
           {currentOpen === 'book' && (
             <div className="ml-4 mt-2 space-y-2">
               <NavLink
-                to="/book/add"
+                to="/Addbook"
                 className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
               >
                 Add Book
               </NavLink>
               <NavLink
-                to="/book/view"
+                to="/Viewbook"
                 className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
               >
                 View Book
@@ -87,14 +87,14 @@ const Sidebar = () => {
         </div>
 
         <NavLink
-          to="/reviews"
+          to="/Review"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           Reviews
         </NavLink>
 
         <NavLink
-          to="/purchase-history"
+          to="/Orders"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           Orders
