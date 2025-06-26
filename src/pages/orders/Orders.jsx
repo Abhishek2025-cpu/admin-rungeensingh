@@ -1,38 +1,18 @@
 import React from "react";
+import { orderHistory } from "../../Custom_json/orderHistory";
+import { FaBook, FaCalendarAlt, FaRupeeSign, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 const Orders = () => {
-  const orderHistory = [
-    {
-      id: 1,
-      book: "Atomic Habits",
-      date: "2025-05-12",
-      amount: "₹299",
-      status: "Success",
-    },
-    {
-      id: 2,
-      book: "The Psychology of Money",
-      date: "2025-04-30",
-      amount: "₹399",
-      status: "Success",
-    },
-    {
-      id: 3,
-      book: "Deep Work",
-      date: "2025-04-10",
-      amount: "₹349",
-      status: "Failed",
-    },
-  ];
-
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Order History</h1>
-
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <FaBook className="text-blue-500" /> Order History
+      </h1>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
           <thead className="bg-gray-100 text-gray-600 uppercase tracking-wider border-b">
             <tr>
+              <th className="py-3 px-4">Image</th>
               <th className="py-3 px-4">Book</th>
               <th className="py-3 px-4">Date</th>
               <th className="py-3 px-4">Amount</th>
@@ -42,9 +22,27 @@ const Orders = () => {
           <tbody>
             {orderHistory.map((order) => (
               <tr key={order.id} className="border-b hover:bg-gray-50">
-                <td className="py-3 px-4 font-medium text-gray-800">{order.book}</td>
-                <td className="py-3 px-4 text-gray-700">{order.date}</td>
-                <td className="py-3 px-4 text-gray-700">{order.amount}</td>
+                {/* Image Column */}
+                <td className="py-3 px-4">
+                  <img
+                    src={order.image}
+                    alt={order.book}
+                    className="h-8 w-8 object-cover"
+                  />
+                </td>
+                {/* Book Title Column */}
+                <td className="py-3 px-4 font-medium text-gray-800">
+                  {order.book}
+                </td>
+                {/* Date Column */}
+                <td className="py-3 px-4 text-gray-700">
+                  {order.date}
+                </td>
+                {/* Amount Column */}
+                <td className="py-3 px-4 text-gray-700">
+                  {order.amount}
+                </td>
+                {/* Status Column */}
                 <td className="py-3 px-4">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${

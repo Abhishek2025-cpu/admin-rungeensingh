@@ -9,7 +9,6 @@ import Login from './pages/Login';
 // import AddInventory from './pages/AddInventory';
 // import InventoryList from './pages/InventoryList';
 import Orders from './pages/orders/Orders';
-import PurchaseHistory from './pages/Purchase history/PurchaseHistory';
 import Review from './pages/Review/Review';
 
 // Category Pages

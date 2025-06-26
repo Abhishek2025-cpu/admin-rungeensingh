@@ -1,151 +1,158 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FaBook, FaUser, FaInfoCircle, FaLanguage, FaImage, FaFilePdf, FaUpload } from 'react-icons/fa';
 
 const Addbook = () => {
   const [bookName, setBookName] = useState('');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [cost, setCost] = useState('');
-    const [category, setCategory] = useState('');
-    const [cover, setCover] = useState(null);
-    const [bookFile, setBookFile] = useState(null);
-    const [preview, setPreview] = useState(null);
-  
-    const handleCoverChange = (e) => {
-      const file = e.target.files[0];
-      setCover(file);
-      if (file) {
-        setPreview(URL.createObjectURL(file));
-      }
-    };
-  
-    // const token = localStorage.get
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      const formData = new FormData();
-      formData.append("bookName", bookName);
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("cost", cost);
-      formData.append("category", category);
-      formData.append("cover", cover);
-      formData.append("bookFile", bookFile);
-  
-      // try {
-      //   const response = await axios.post(`https://rungeenApp.ddns.net/admin/book`, formData, {
-      //     headers: {
-      //       Authorization: "",
-      //       Content-Type: "multipart/form-data",
-      //     },
-      //   });
-      //   alert("Book uploaded successfully!");
-      //   console.log(response.data);
-      // } catch (error) {
-      //   alert("Error uploading book.");
-      //   console.error(error);
-      // }
-    };
-  
-    return (
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Upload Book</h2>
-  
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Book Name</label>
+  const [author, setAuthor] = useState('');
+  const [about, setAbout] = useState('');
+  const [language, setLanguage] = useState('');
+  const [category, setCategory] = useState('');
+  const [cover, setCover] = useState(null);
+  const [bookFile, setBookFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+  const handleCoverChange = (e) => {
+    const file = e.target.files[0];
+    setCover(file);
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('bookName', bookName);
+    formData.append('author', author);
+    formData.append('about', about);
+    formData.append('language', language);
+    formData.append('category', category);
+    formData.append('cover', cover);
+    formData.append('bookFile', bookFile);
+    // TODO: Submit logic
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 px-6 py-8">
+      <div className="w-full bg-white rounded-xl shadow-md px-8 py-10">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <FaUpload className="text-blue-600" /> Upload New Book
+          </h2>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring focus:ring-blue-200"
+          >
+            <option value="">Choose Category</option>
+            <option value="Technology">Technology</option>
+            <option value="Self-help">Self-help</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Finance">Finance</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaBook /> Book Name
+            </label>
             <input
               type="text"
               value={bookName}
               onChange={(e) => setBookName(e.target.value)}
               required
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-md text-sm"
             />
           </div>
-  
+
           <div>
-            <label className="block mb-1 font-medium text-gray-700">Title</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaUser /> Author
+            </label>
             <input
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
               required
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-md text-sm"
             />
           </div>
-  
+
           <div>
-            <label className="block mb-1 font-medium text-gray-700">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaLanguage /> Language
+            </label>
+            <input
+              type="text"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              required
+              className="w-full px-4 py-2 border rounded-md text-sm"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaInfoCircle /> About
+            </label>
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
               rows="4"
               required
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-md text-sm"
             />
           </div>
-  
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Cost</label>
-            <input
-              type="number"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
-              required
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-  
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Category</label>
-            <input
-              type="text"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-              className="w-full px-4 py-2 border rounded-lg"
-            />
-          </div>
-  
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Cover Image</label>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaImage /> Cover Image
+            </label>
             <input
               type="file"
               accept="image/*"
               onChange={handleCoverChange}
               required
-              className="block w-full text-sm text-gray-600"
+              className="text-sm text-gray-600"
             />
             {preview && (
               <img
                 src={preview}
                 alt="Cover Preview"
-                className="mt-4 w-40 h-56 object-cover rounded border border-gray-200 shadow"
+                className="mt-3 w-32 h-48 object-cover rounded border border-gray-300 shadow"
               />
             )}
           </div>
-  
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Book File (PDF/ePub)</label>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <FaFilePdf /> Book File (PDF)
+            </label>
             <input
               type="file"
-              accept=".pdf,.epub"
+              accept=".pdf"
               onChange={(e) => setBookFile(e.target.files[0])}
               required
-              className="block w-full text-sm text-gray-600"
+              className="text-sm text-gray-600"
             />
           </div>
-  
-          <div>
+
+          <div className="md:col-span-2">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-200"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-medium transition"
             >
-              Upload Book
+              <div className="flex items-center justify-center gap-2">
+                <FaUpload /> Upload Book
+              </div>
             </button>
           </div>
         </form>
       </div>
-    );
-}
+    </div>
+  );
+};
 
-export default Addbook
+export default Addbook;
