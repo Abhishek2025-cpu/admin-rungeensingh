@@ -1,7 +1,7 @@
 // src/pages/ForgotPassword.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";          // same logo you used on Login
+import logo from "../../assets/logo.png";          // same logo you used on Login
 // import { requestPasswordReset } from "../api/api"; // create this API helper
 
 const ForgotPassword = () => {

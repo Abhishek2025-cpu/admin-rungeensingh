@@ -42,14 +42,6 @@ const AddCategory = () => {
             />
           </div>
 
-          
-          {successMessage && (
-  <div className="mb-4 text-green-700 font-medium bg-green-100 p-3 rounded-md border border-green-300">
-    {successMessage}
-  </div>
-)}
-
-
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Upload Category Image
