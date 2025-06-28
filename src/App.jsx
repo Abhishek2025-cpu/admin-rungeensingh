@@ -20,12 +20,14 @@ import ViewCategory from './pages/category/ViewCategory/ViewCategory';
 import DashCompo from "./pages/DashCompo";
 import Addbook from "./pages/Book/Addbook/Addbook";
 import Viewbook from "./pages/Book/ViewBook/Viewbook";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/" element={<Dashboard />}>
           {/* <Route path="add-inventory" element={<AddInventory />} /> */}
           {/* <Route path="inventory-list" element={<InventoryList />} /> */}
