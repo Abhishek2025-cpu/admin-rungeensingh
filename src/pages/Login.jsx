@@ -84,6 +84,9 @@ const Login = () => {
           required
         />
 
+        <p onClick={() => navigate("/forgot-password")} className="mb-6 text-right text-sm text-blue-600 hover:underline cursor-pointer">Forgot password</p>
+
+
         {/* Submit Button */}
         <button
           type="submit"
