@@ -1,34 +1,52 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AddCategory = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [loading, setLoading] = useState(false);  // show add click loader 
-  const [successMessage, setSuccessMessage] = useState(''); 
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+
     setImageFile(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
+    const previewURL = URL.createObjectURL(file);
+    setPreview(previewURL);
   };
+
+  // ✅ useEffect for preview cleanup
+  useEffect(() => {
+    // Cleanup function to revoke preview when component unmounts or preview changes
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setSuccessMessage('');
+    setErrorMessage('');
+
+    if (!imageFile) {
+      setErrorMessage('Please select an image.');
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('images', imageFile);
+    formData.append('images', imageFile); // use 'image' if your backend expects that
 
     try {
       const response = await axios.post(
-        'https://rungeensingh.onrender.com/api/categories/add-category',
+        'https://rungeenbooks.onrender.com/api/categories/add-category',
         formData,
         {
           headers: {
@@ -37,16 +55,18 @@ const AddCategory = () => {
         }
       );
 
-      setName('');
-      setImageFile(null);
-      setPreview(null);
-      setSuccessMessage(' Category added successfully!'); 
-
-      // it will  auto-hide mssg  after 3 sec
-      setTimeout(() => setSuccessMessage(''), 3000);
+      if (response.status === 200 || response.status === 201) {
+        setSuccessMessage('✅ Category added successfully!');
+        setName('');
+        setImageFile(null);
+        setPreview(null);
+        setTimeout(() => setSuccessMessage(''), 3000);
+      } else {
+        setErrorMessage('❌ Unexpected response from server.');
+      }
     } catch (error) {
       console.error('Error adding category:', error);
-      alert('Something went wrong!');
+      setErrorMessage('❌ Something went wrong! Please try again.');
     } finally {
       setLoading(false);
     }
@@ -60,6 +80,12 @@ const AddCategory = () => {
         {successMessage && (
           <div className="mb-4 text-green-600 font-medium bg-green-100 p-3 rounded-md border border-green-300">
             {successMessage}
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className="mb-4 text-red-600 font-medium bg-red-100 p-3 rounded-md border border-red-300">
+            {errorMessage}
           </div>
         )}
 
@@ -104,8 +130,11 @@ const AddCategory = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-2 rounded-md text-sm font-medium transition 
-                ${loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+              className={`w-full py-2 rounded-md text-sm font-medium transition ${
+                loading
+                  ? 'bg-blue-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
             >
               {loading ? 'Adding...' : 'Add Category'}
             </button>
@@ -117,4 +146,3 @@ const AddCategory = () => {
 };
 
 export default AddCategory;
-

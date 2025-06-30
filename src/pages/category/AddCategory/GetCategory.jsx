@@ -5,19 +5,45 @@ const UpdateCategory = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Optional: fetch existing data here if needed
+  const categoryId = '68402400ad55fc2d2d82e4b0'; // Update with dynamic ID if needed
+  const API_BASE = 'https://rungeenbooks.onrender.com/api/categories';
+
+  useEffect(() => {
+    // Fetch existing category details
+    const fetchCategory = async () => {
+      try {
+        const res = await axios.get(`${API_BASE}/${categoryId}`);
+        setName(res.data.name || '');
+        if (res.data.images && res.data.images[0]) {
+          setPreview(res.data.images[0]); // Adjust based on actual image URL structure
+        }
+      } catch (error) {
+        console.error('Failed to fetch category:', error);
+        alert('Failed to load category data');
+      }
+    };
+
+    fetchCategory();
+  }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
     if (file) {
-      setPreview(URL.createObjectURL(file));
+      const previewURL = URL.createObjectURL(file);
+      setPreview(previewURL);
+
+      // Revoke the preview when component unmounts or file changes
+      return () => URL.revokeObjectURL(previewURL);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const formData = new FormData();
     formData.append('name', name);
     if (imageFile) {
@@ -26,7 +52,7 @@ const UpdateCategory = () => {
 
     try {
       const response = await axios.put(
-        'https://rungeensingh.onrender.com/api/categories/update/68402400ad55fc2d2d82e4b0',
+        `${API_BASE}/update/${categoryId}`,
         formData,
         {
           headers: {
@@ -35,13 +61,19 @@ const UpdateCategory = () => {
         }
       );
 
-      alert('Category updated successfully!');
-      setName('');
-      setImageFile(null);
-      setPreview(null);
+      if (response.data && response.data.message) {
+        alert('✅ ' + response.data.message);
+        setName('');
+        setImageFile(null);
+        setPreview(null);
+      } else {
+        alert('❌ Unexpected response from server');
+      }
     } catch (error) {
-      console.error('Error updating category:', error);
-      alert('Failed to update category');
+      console.error('Update failed:', error);
+      alert('❌ Failed to update category. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -89,9 +121,12 @@ const UpdateCategory = () => {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition"
+              disabled={loading}
+              className={`w-full ${
+                loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'
+              } text-white py-2 rounded-md text-sm font-medium transition`}
             >
-              Update Category
+              {loading ? 'Updating...' : 'Update Category'}
             </button>
           </div>
         </form>
@@ -101,4 +136,3 @@ const UpdateCategory = () => {
 };
 
 export default UpdateCategory;
-
