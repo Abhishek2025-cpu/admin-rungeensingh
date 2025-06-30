@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UpdateCategory = () => {
+const GetCategory = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const categoryId = '68402400ad55fc2d2d82e4b0'; // Update with dynamic ID if needed
+  const categoryId = '68402400ad55fc2d2d82e4b0'; // Replace with dynamic ID if needed
   const API_BASE = 'https://rungeenbooks.onrender.com/api/categories';
 
   useEffect(() => {
-    // Fetch existing category details
     const fetchCategory = async () => {
       try {
         const res = await axios.get(`${API_BASE}/${categoryId}`);
         setName(res.data.name || '');
         if (res.data.images && res.data.images[0]) {
-          setPreview(res.data.images[0]); // Adjust based on actual image URL structure
+          setPreview(res.data.images[0]); // Backend should return image URL
         }
       } catch (error) {
         console.error('Failed to fetch category:', error);
-        alert('Failed to load category data');
+        alert('❌ Failed to load category data');
       }
     };
 
@@ -34,11 +33,16 @@ const UpdateCategory = () => {
     if (file) {
       const previewURL = URL.createObjectURL(file);
       setPreview(previewURL);
-
-      // Revoke the preview when component unmounts or file changes
-      return () => URL.revokeObjectURL(previewURL);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (preview?.startsWith('blob:')) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,17 +55,13 @@ const UpdateCategory = () => {
     }
 
     try {
-      const response = await axios.put(
-        `${API_BASE}/update/${categoryId}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const response = await axios.put(`${API_BASE}/update/${categoryId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-      if (response.data && response.data.message) {
+      if (response.data?.message) {
         alert('✅ ' + response.data.message);
         setName('');
         setImageFile(null);
@@ -135,4 +135,4 @@ const UpdateCategory = () => {
   );
 };
 
-export default UpdateCategory;
+export default GetCategory;
