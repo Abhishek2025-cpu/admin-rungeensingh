@@ -1,37 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AddCategory = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    return () => {
+      // Cleanup preview image to avoid memory leaks
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+
     setImageFile(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
+    setPreview(URL.createObjectURL(file));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    if (!imageFile) {
+      setErrorMessage('Please select an image.');
+      setLoading(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('image', imageFile);
-    // TODO: Handle submit
+    formData.append('images', imageFile); // Change to 'image' if your backend needs it
+
+    try {
+      const response = await axios.post(
+        'https://rungeenbooks.onrender.com/api/categories/add-category',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setSuccessMessage('✅ Category added successfully!');
+        setName('');
+        setImageFile(null);
+        setPreview(null);
+
+        setTimeout(() => setSuccessMessage(''), 3000);
+      } else {
+        setErrorMessage('❌ Failed to add category.');
+      }
+    } catch (error) {
+      console.error('API Error:', error);
+      setErrorMessage('❌ Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <div className="w-full bg-white rounded-xl shadow-md px-8 py-10">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6"> Add New Category</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Category</h2>
+
+        {successMessage && (
+          <div className="mb-4 text-green-600 font-medium bg-green-100 p-3 rounded-md border border-green-300">
+            {successMessage}
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className="mb-4 text-red-600 font-medium bg-red-100 p-3 rounded-md border border-red-300">
+            {errorMessage}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Category Name
-            </label>
-
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
             <input
               type="text"
               value={name}
@@ -43,9 +102,7 @@ const AddCategory = () => {
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Upload Category Image
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Upload Category Image</label>
             <input
               type="file"
               accept="image/*"
@@ -57,7 +114,7 @@ const AddCategory = () => {
               <div className="mt-4">
                 <img
                   src={preview}
-                  alt="Category Preview"
+                  alt="Preview"
                   className="w-32 h-32 object-cover rounded border border-gray-300 shadow-sm"
                 />
               </div>
@@ -67,9 +124,14 @@ const AddCategory = () => {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-medium transition"
+              disabled={loading}
+              className={`w-full py-2 rounded-md text-sm font-medium transition ${
+                loading
+                  ? 'bg-blue-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
             >
-              Add Category
+              {loading ? 'Adding...' : 'Add Category'}
             </button>
           </div>
         </form>
