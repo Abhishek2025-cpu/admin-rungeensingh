@@ -1,7 +1,8 @@
 // src/pages/ForgotPassword.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";          // same logo you used on Login
+import { forgetPasswort } from "../../api/frogetPassword";
+// import logo from "../assets/logo.png";          // same logo you used on Login
 // import { requestPasswordReset } from "../api/api"; // create this API helper
 
 const ForgotPassword = () => {
@@ -17,19 +18,9 @@ const ForgotPassword = () => {
     setLoading(true);
     setError("");
     setMessage("");
-
-    // try {
-    //   /* ⬇️ POST to your backend */
-    //   await requestPasswordReset(usernameOrEmail); // adjust arg if your API expects { email }
-    //   setMessage(
-    //     "If an account exists, we’ve sent reset instructions to your email."
-    //   );
-    // } catch (err) {
-    //   console.error(err);
-    //   setError("Sorry, something went wrong. Please try again later.");
-    // } finally {
-    //   setLoading(false);
-    // }
+    const rs = await forgetPasswort(usernameOrEmail);
+    console.log(rs);
+    
   };
 
   return (
@@ -40,7 +31,7 @@ const ForgotPassword = () => {
       >
         {/* Logo */}
         <div className="flex justify-center mb-6">
-          <img src={logo} alt="Rangin Web Logo" className="h-16 w-auto" />
+          {/* <img src={logo} alt="Rangin Web Logo" className="h-16 w-auto" /> */}
         </div>
 
         {/* Heading */}

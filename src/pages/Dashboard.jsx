@@ -25,7 +25,7 @@ const Dashboard = () => {
       
            
           {/* Page Outlet */}
-          {/* <Outlet />   */}
+          <Outlet />  
       </div>
     </div>
   );
