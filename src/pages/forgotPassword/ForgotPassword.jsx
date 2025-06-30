@@ -1,7 +1,7 @@
 // src/pages/ForgotPassword.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";          // same logo you used on Login
+import { forgetPassword } from "../../api/frogetPassword";
 // import { requestPasswordReset } from "../api/api"; // create this API helper
 
 const ForgotPassword = () => {
@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     setLoading(true);
     setError("");
     setMessage("");
-    const rs = await forgetPasswort(usernameOrEmail);
+    const rs = await forgetPassword(usernameOrEmail);
     console.log(rs);
     
   };

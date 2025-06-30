@@ -24,7 +24,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/orgotPassword" element={<ForgotPassword/>}/>
+        <Route path="/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/" element={<Dashboard />}>
           {/* <Route path="add-inventory" element={<AddInventory />} /> */}
           {/* <Route path="inventory-list" element={<InventoryList />} /> */}

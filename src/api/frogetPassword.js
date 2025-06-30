@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../base_url";
 
-export const forgetPasswort = async (email) => {
+export const forgetPassword = async (email) => {
   try {
     const rs = await axios.post(
       BASE_URL + "/forgot-password",
