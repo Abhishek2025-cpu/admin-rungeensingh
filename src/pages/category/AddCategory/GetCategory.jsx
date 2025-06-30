@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const AddCategory = () => {
+const UpdateCategory = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
+
+  // Optional: fetch existing data here if needed
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -13,51 +16,70 @@ const AddCategory = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('image', imageFile);
-    // TODO: Handle submit
+    if (imageFile) {
+      formData.append('images', imageFile);
+    }
+
+    try {
+      const response = await axios.put(
+        'https://rungeensingh.onrender.com/api/categories/update/68402400ad55fc2d2d82e4b0',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      alert('Category updated successfully!');
+      setName('');
+      setImageFile(null);
+      setPreview(null);
+    } catch (error) {
+      console.error('Error updating category:', error);
+      alert('Failed to update category');
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <div className="w-full bg-white rounded-xl shadow-md px-8 py-10">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6"> Add New Category</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Update Category</h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Category Name
             </label>
-
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
               className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
-              placeholder="e.g. Design, Finance, AI"
+              placeholder="e.g. Updated Name"
             />
           </div>
 
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Upload Category Image
+              Upload New Image (Optional)
             </label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              required
               className="text-sm text-gray-600"
             />
             {preview && (
               <div className="mt-4">
                 <img
                   src={preview}
-                  alt="Category Preview"
+                  alt="Preview"
                   className="w-32 h-32 object-cover rounded border border-gray-300 shadow-sm"
                 />
               </div>
@@ -67,9 +89,9 @@ const AddCategory = () => {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-medium transition"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition"
             >
-              Add Category
+              Update Category
             </button>
           </div>
         </form>
@@ -78,4 +100,5 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default UpdateCategory;
+

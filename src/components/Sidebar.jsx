@@ -31,74 +31,74 @@ const Sidebar = () => {
         >
           Dashboard
         </NavLink>
+{/* Category Dropdown */}
+<div>
+  <button
+    onClick={() => handleToggle('category')}
+    className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium focus:outline-none"
+  >
+    <span>Category</span>
+    {currentOpen === 'category' ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+  </button>
+  {currentOpen === 'category' && (
+    <div className="ml-4 mt-2 space-y-2">
+      <NavLink
+        to="/AddCategory"
+        className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+      >
+        Add New Category
+      </NavLink>
+      <NavLink
+        to="/ViewCategory"
+        className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+      >
+        View Category
+      </NavLink>
+   
+    </div>
+  )}
+</div>
 
-        {/* Category Dropdown */}
-        <div>
-          <button
-            onClick={() => handleToggle('category')}
-            className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium focus:outline-none"
-          >
-            <span>Category</span>
-            {currentOpen === 'category' ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
-          {currentOpen === 'category' && (
-            <div className="ml-4 mt-2 space-y-2">
-              <NavLink
-                to="/AddCategory"
-                className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-              >
-                Add New Category
-              </NavLink>
-              <NavLink
-                to="/ViewCategory"
-                className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-              >
-                View Category
-              </NavLink>
-            </div>
-          )}
-        </div>
+{/* Book Dropdown */}
+<div>
+  <button
+    onClick={() => handleToggle('book')}
+    className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium focus:outline-none"
+  >
+    <span>Book</span>
+    {currentOpen === 'book' ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+  </button>
+  {currentOpen === 'book' && (
+    <div className="ml-4 mt-2 space-y-2">
+      <NavLink
+        to="/Addbook"
+        className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+      >
+        Add Book
+      </NavLink>
+      <NavLink
+        to="/Viewbook"
+        className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+      >
+        View Book
+      </NavLink>
+    </div>
+  )}
+</div>
 
-        {/* Book Dropdown */}
-        <div>
-          <button
-            onClick={() => handleToggle('book')}
-            className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium focus:outline-none"
-          >
-            <span>Book</span>
-            {currentOpen === 'book' ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
-          {currentOpen === 'book' && (
-            <div className="ml-4 mt-2 space-y-2">
-              <NavLink
-                to="/Addbook"
-                className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-              >
-                Add Book
-              </NavLink>
-              <NavLink
-                to="/Viewbook"
-                className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-              >
-                View Book
-              </NavLink>
-            </div>
-          )}
-        </div>
+<NavLink
+  to="/Review"
+  className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+>
+  Reviews
+</NavLink>
 
-        <NavLink
-          to="/Review"
-          className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-        >
-          Reviews
-        </NavLink>
-
-        <NavLink
-          to="/Orders"
-          className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-        >
-          Orders
-        </NavLink>
+<NavLink
+  to="/Orders"
+  className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+>
+  Orders
+</NavLink>
       </nav>
     </aside>
   );
