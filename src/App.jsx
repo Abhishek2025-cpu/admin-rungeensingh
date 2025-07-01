@@ -15,6 +15,8 @@ import ViewCategory from './pages/category/ViewCategory/ViewCategory';
 import DashCompo from "./pages/DashCompo";
 import Addbook from "./pages/Book/Addbook/Addbook";
 import Viewbook from "./pages/Book/ViewBook/Viewbook";
+
+// delete api 
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 
 
@@ -32,10 +34,14 @@ function App() {
           <Route path ="/CategoryList" element={<CategoryList/>}/>
           {/* <Route path ="UpdateCategory" element ={<UpdateCategory/>}/> */}
           <Route path ="/GetCategory" element ={<GetCategory/>}/>
+           {/* <Route path="/" element={<DashCompo />} />
+        <Route path="/" element={<DashCompo />} /> */}
+               <Route path="/" element={<DashCompo />} />
         <Route path="/DashCompo" element={<DashCompo />} />
           <Route path="/ViewCategory" element={<ViewCategory />} />
           <Route path="/Addbook" element={<Addbook/>} />
           <Route path="/Viewbook" element={<Viewbook/>} />
+      
           <Route path="/Orders" element={<Orders />} />
           <Route path="/Review" element={<Review />} />
           {/* <Route path="PurchaseHistory" element={<PurchaseHistory />} /> */}

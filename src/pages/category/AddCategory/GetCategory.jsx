@@ -23,6 +23,7 @@ const GetCategory = () => {
         alert('❌ Failed to load category data');
       }
     };
+ 
 
     fetchCategory();
   }, []);
