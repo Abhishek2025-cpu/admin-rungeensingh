@@ -55,7 +55,7 @@ export default function DashCompo() {
             </div>
 
             <div className="bg-gray-50 p-4 rounded-xl shadow">
-              <h2 className="text-lg font-semibold mb-2">System Summary</h2>
+              <h2 className="text-lg font-semibold mb-2">System summary</h2>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie

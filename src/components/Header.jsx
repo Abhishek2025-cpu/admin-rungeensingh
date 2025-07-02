@@ -7,7 +7,7 @@ const Header = () => {
 
   const handleLogout = () => {
     // You can clear auth tokens or user data here if needed
-    navigate("/DashCompo");
+    navigate("/login");
   };
 
   return (
