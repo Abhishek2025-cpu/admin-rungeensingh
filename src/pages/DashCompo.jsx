@@ -7,14 +7,14 @@ import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, Legend, Resp
 
 export default function DashCompo() {
 
-      const navigation = useNavigate();
-  const token = localStorage.getItem("token");
+  //     const navigation = useNavigate();
+  // const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!token) {
-      navigation("/login");
-    }
-  }, [navigation, token]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigation("/login");
+  //   }
+  // }, [navigation, token]);
 
   // Sample data
   const data = [
