@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!token) {
-      navigation("/login");
+      navigation("/DashCompo");
     }
   }, [navigation, token]);
 
