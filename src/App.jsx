@@ -31,6 +31,7 @@ function App() {
         {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/forgotPassword" element={<ForgotPassword/>}/> */}
         <Route path="/" element={<Dashboard />}>
+        
           {/* <Route path="add-inventory" element={<AddInventory />} /> */}
           {/* <Route path="inventory-list" element={<InventoryList />} /> */}
           <Route path="/AddCategory" element={<AddCategory />} />
