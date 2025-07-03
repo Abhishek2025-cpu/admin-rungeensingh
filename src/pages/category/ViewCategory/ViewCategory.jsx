@@ -268,7 +268,7 @@ const ViewCategory = () => {
 
                   <td className="py-4 px-4 font-medium text-gray-900">
                     {editId === category._id ? (
-                      <input
+              <input
                   type="text"
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
@@ -301,30 +301,30 @@ const ViewCategory = () => {
                             className="text-green-600 hover:text-green-800"
                           >
                             <Save size={18} />
-                          </button>
+             </button>
                           <button
                             onClick={handleCancelEdit}
                             className="text-gray-500 hover:text-gray-700"
-                          >
-                            <X size={18} />
+                     >
+                  <X size={18} />
                           </button>
                         </>
                       ) : (
-                        <>
+                 <>
                           <button
                             onClick={() => handleEdit(category._id, category.name)}
-                            className="text-blue-600 hover:text-blue-800"
-                          >
-                            <Pencil size={18} />
+         >
+                                            className="text-blue-600 hover:text-blue-800"
+                     <Pencil size={18} />
                           </button>
                        <button
-                            onClick={() => handleDelete(category._id)}
+               onClick={() => handleDelete(category._id)}
                             className="text-red-600 hover:text-red-800"
                           >
                             <Trash2 size={18} />
                           </button>
                         </>
-                      )}
+          )}
                     </div>
                   </td>
                 </tr>
