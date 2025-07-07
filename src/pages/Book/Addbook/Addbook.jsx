@@ -198,8 +198,8 @@ const Addbook = () => {
   const [about, setAbout] = useState('');
   const [language, setLanguage] = useState('');
   const [category, setCategory] = useState('');
-  const [cover, setCover] = useState(null);
-  const [bookFile, setBookFile] = useState(null);
+  const [coverImage, setCover] = useState(null);
+  const [pdf, setBookFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [categories, setCategories] = useState([]); // Dynamic categories
 
