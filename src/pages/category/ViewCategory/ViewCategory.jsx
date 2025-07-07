@@ -314,7 +314,7 @@ const ViewCategory = () => {
                           <button
                             onClick={() => handleEdit(category._id, category.name)}
          >
-                                            className="text-blue-600 hover:text-blue-800"
+                                            {/* className="text-blue-600 hover:text-blue-800" */}
                      <Pencil size={18} />
                           </button>
                        <button
