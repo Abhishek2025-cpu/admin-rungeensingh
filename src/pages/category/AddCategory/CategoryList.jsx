@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AddCategory = () => {
+const CategoryList = () => {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -145,4 +145,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default CategoryList;

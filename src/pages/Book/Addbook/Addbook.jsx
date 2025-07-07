@@ -208,6 +208,7 @@ const Addbook = () => {
       try {
         const response = await fetch(
           'https://rungeenbooks.onrender.com/api/categories/get-category'
+          // 'https://rungeenbooks.onrender.com/api/books/add-books'
         );
         const data = await response.json();
         console.log('Fetched categories:', data);

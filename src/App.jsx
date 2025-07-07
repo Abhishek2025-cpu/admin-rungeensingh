@@ -20,7 +20,7 @@ import Viewbook from "./pages/Book/ViewBook/Viewbook";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+// import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 
 
 
@@ -29,8 +29,9 @@ function App() {
     <Router>
       <Routes>
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/forgotPassword" element={<ForgotPassword/>}/>
+        {/* <Route path="/forgotPassword" element={<ForgotPassword/>}/> */}
         <Route path="/" element={<Dashboard />}>
+        
           {/* <Route path="add-inventory" element={<AddInventory />} /> */}
           {/* <Route path="inventory-list" element={<InventoryList />} /> */}
           <Route path="/AddCategory" element={<AddCategory />} />
