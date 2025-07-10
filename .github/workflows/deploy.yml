@@ -1,0 +1,22 @@
+name: Auto Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main  # or your deployment branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 194.238.17.106
+          username: root
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /opt/ranginsinghproject
+            git pull origin main
+            echo "Deployment complete"
