@@ -18,8 +18,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script: |
-             script: |
-             cd  /opt/ranginsinghproject
-             ./deploy.sh
-             echo "✅ Deployment successful!"
+            cd  /opt/ranginsinghproject
+            ./deploy.sh
+            echo "✅ Deployment successful!"
 
