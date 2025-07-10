@@ -3,7 +3,7 @@ name: Auto Deploy to Ubuntu Server
 on:
   push:
     branches:
-      - main  # or your deployment branch
+      - main
 
 jobs:
   deploy:
@@ -16,7 +16,12 @@ jobs:
           host: 194.238.17.106
           username: root
           password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
           script: |
             cd /opt/ranginsinghproject
             git pull origin main
-            echo "Deployment complete"
+            npm install
+            npm run build
+            npx serve -s dist -l 3000 &
+            echo "✅ Deployment successful!"
+
