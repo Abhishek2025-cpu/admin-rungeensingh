@@ -1,3 +1,5 @@
+// userList bnani h isko , all users will display
+
 import React from 'react';
 import { FaUserCircle, FaStar } from 'react-icons/fa';
 
@@ -22,8 +24,14 @@ const Reviews = () => {
       rating: 3,
       comment: 'Good overall, but a bit repetitive in some sections.',
     },
-  ];
 
+  {
+    id:3,
+    user:'Headher ',
+    rating:4,
+    comment:'Impressive',
+  }
+  ];
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <div className="w-full bg-white rounded-xl shadow-md px-8 py-10">
@@ -45,11 +53,11 @@ const Reviews = () => {
                 {[...Array(5)].map((_, i) => (
                   <FaStar
                     key={i}
-                    className={i < review.rating ? 'fill-current' : 'text-gray-300'}
+                    className={i <review.rating ? 'fill-current' :'text-gray-300'}
                   />
                 ))}
               </div>
-              <p className="text-gray-700 text-sm">{review.comment}</p>
+              <p className ="text-gray-700 text-sm">{review.comment}</p>
             </div>
           ))}
         </div>
