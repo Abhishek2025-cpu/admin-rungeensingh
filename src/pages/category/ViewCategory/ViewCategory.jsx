@@ -118,14 +118,15 @@ const ViewCategory = () => {
   const handleDelete = async (id) => {
     // Ask for confirmation before deleting
     if (window.confirm('Are you sure you want to delete this category? This action cannot be undone.')) {
-      try {
-        await axios.delete(`https://rungeenbooks.onrender.com/api/categories/delete/${id}`);
-        toast.success('Category deleted successfully!');
-        fetchCategories(); // Refresh list after deletion
-      } catch (error) {
-        console.error('Error deleting category:', error);
-        toast.error(error.response?.data?.message || 'Failed to delete category.');
-      }
+        try {
+          await axios.delete(`https://rungeenbooks.onrender.com/api/categories/delete/${id}`);
+          toast.success('Category deleted successfully!');
+          fetchCategories();
+        }
+        catch(error){
+          console.error('Error deleting category:',error);
+          toast.error(error.response?.data?.message || 'Failed to delete category.');
+        }
     }
   };
 
@@ -190,13 +191,16 @@ const ViewCategory = () => {
                               onChange={handleImageChange}
                               className="text-xs w-full max-w-[150px]"
                             />
+                            npm run dev 
+                            
                           </div>
                         ) : (
-                          <img
-                            src={category.images?.[0]?.url || '/placeholder.jpg'}
-                            alt={category.name}
-                            className="w-14 h-14 object-cover rounded border border-gray-300 shadow-sm"
+                          <img 
+                          src={category.images?.[0]?.url || '/placeholder.jpg'}
+                          alt={category.name}
+               className="w-14 h-14 object-cover rounded border border-gray-300 shadow-sm "
                           />
+
                         )}
                       </td>
 

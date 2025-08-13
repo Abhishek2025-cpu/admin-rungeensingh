@@ -1,0 +1,24 @@
+name: Auto Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 194.238.17.106
+          username: root
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          script: |
+            cd  /opt/ranginsinghproject
+            ./deploy.sh
+            echo "✅ Deployment successful!"
+

@@ -45,16 +45,20 @@ const GetCategory = () => {
     };
   }, [preview]);
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  const handleSubmit= async(e)=>{
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append('name', name);
-    if (imageFile) {
-      formData.append('images', imageFile);
-    }
+    const formData =new FormData();
+    formData.append('name',name);
+    if(imageFile){
+      formData.append('image,imageFile');
 
+    }
     try {
       const response = await axios.put(`${API_BASE}/update/${categoryId}`, formData, {
         headers: {
@@ -99,9 +103,10 @@ const GetCategory = () => {
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+
+            <lable className="block text-sm font-medium text-gray-700 mb-1" >
               Upload New Image (Optional)
-            </label>
+            </lable>
             <input
               type="file"
               accept="image/*"
@@ -119,8 +124,11 @@ const GetCategory = () => {
             )}
           </div>
 
+    
+      
+
           <div className="md:col-span-2">
-            <button
+            {/* <button
               type="submit"
               disabled={loading}
               className={`w-full ${
@@ -128,7 +136,16 @@ const GetCategory = () => {
               } text-white py-2 rounded-md text-sm font-medium transition`}
             >
               {loading ? 'Updating...' : 'Update Category'}
-            </button>
+            </button> */}
+            <button 
+            type ="submit"
+            disabled={loading}
+            className={`w-full${
+              loading ? 'bg-gray-400':'bg-green-600 hover:bg-green-700'
+            }text-white py-2 rounded-md text-sm font-medium transition`}
+             >
+             { loading ? 'Updating...' : 'Update Category'}
+             </button>
           </div>
         </form>
       </div>

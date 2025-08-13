@@ -75,8 +75,7 @@ export default function DashCompo() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-
-         
+            
           </div>
 
         </main>
