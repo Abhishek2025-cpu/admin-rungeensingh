@@ -1,26 +1,32 @@
-// src/components/Header.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const adminName = sessionStorage.getItem("adminName");
+  const adminEmail = sessionStorage.getItem("adminEmail");
 
-  //handler was comment for no login route 
-  // const navigate = useNavigate();
-
-  // const handleLogout = () => {
-  //   // You can clear auth tokens or user data here if needed
-  //   navigate("/login");
-  // };
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/");
+  };
 
   return (
-    <header className="bg-white px-6 py-4 flex justify-between items-center shadow-md">
-      <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
-      {/* <button
-        onClick={handleLogout}
-        className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded transition duration-200"
-      >
-        Logout
-      </button> */}
+    <header className="flex items-center justify-between bg-white shadow px-6 py-3">
+      <h1 className="text-lg font-bold text-gray-700">Admin Dashboard</h1>
+
+      <div className="flex items-center space-x-4">
+        <div className="text-right">
+          <p className="font-semibold">{adminName}</p>
+          <p className="text-sm text-gray-500">{adminEmail}</p>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Logout
+        </button>
+      </div>
     </header>
   );
 };
