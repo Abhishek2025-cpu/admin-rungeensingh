@@ -16,6 +16,7 @@ import DashCompo from "./pages/DashCompo";
 import Addbook from "./pages/Book/Addbook/Addbook";
 import Viewbook from "./pages/Book/ViewBook/Viewbook";
 import AuthorInfo from "./pages/AuthorInfo";
+import Smtp from "./components/Smtp";
 
 // Toast
 import { ToastContainer } from 'react-toastify';
@@ -42,6 +43,7 @@ function App() {
             <Route path="/Orders" element={<Orders />} />
             <Route path="/Review" element={<Review />} />
             <Route path="/AuthorInfo" element={<AuthorInfo />} />
+            <Route path="/smtp-settings" element={<Smtp />} />
           </Route>
 
           {/* Redirect unknown paths */}

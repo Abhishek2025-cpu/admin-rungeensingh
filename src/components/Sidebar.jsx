@@ -195,22 +195,22 @@ const Sidebar = () => {
           >
             <Send size={18} /> SMTP Settings
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/push-notifications"
             className={({ isActive }) =>
               isActive ? activeClass : inactiveClass
             }
           >
             <Bell size={18} /> Push Notifications
-          </NavLink>
-          <NavLink
+          </NavLink> */}
+          {/* <NavLink
             to="/newsletters"
             className={({ isActive }) =>
               isActive ? activeClass : inactiveClass
             }
           >
             <Mail size={18} /> Newsletters
-          </NavLink>
+          </NavLink> */}
 
           {/* Logout */}
           <button
