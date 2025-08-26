@@ -31,19 +31,27 @@ function App() {
           {/* Public route */}
           <Route path="/" element={<Login />} />
 
-          {/* Protected routes */}
-          <Route element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
-            <Route path="/dashboard" element={<DashCompo />} />
-            <Route path="/AddCategory" element={<AddCategory />} />
-            <Route path="/CategoryList" element={<CategoryList />} />
-            <Route path="/GetCategory" element={<GetCategory />} />
-            <Route path="/ViewCategory" element={<ViewCategory />} />
-            <Route path="/Addbook" element={<Addbook />} />
-            <Route path="/Viewbook" element={<Viewbook />} />
-            <Route path="/Orders" element={<Orders />} />
-            <Route path="/Review" element={<Review />} />
-            <Route path="/AuthorInfo" element={<AuthorInfo />} />
-            <Route path="/smtp-settings" element={<Smtp />} />
+          {/* Protected routes with Dashboard as layout */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          >
+            {/* default child when /dashboard is visited */}
+            <Route index element={<DashCompo />} />
+            <Route path="AddCategory" element={<AddCategory />} />
+            <Route path="CategoryList" element={<CategoryList />} />
+            <Route path="GetCategory" element={<GetCategory />} />
+            <Route path="ViewCategory" element={<ViewCategory />} />
+            <Route path="Addbook" element={<Addbook />} />
+            <Route path="Viewbook" element={<Viewbook />} />
+            <Route path="Orders" element={<Orders />} />
+            <Route path="Review" element={<Review />} />
+            <Route path="AuthorInfo" element={<AuthorInfo />} />
+            <Route path="smtp-settings" element={<Smtp />} />
           </Route>
 
           {/* Redirect unknown paths */}

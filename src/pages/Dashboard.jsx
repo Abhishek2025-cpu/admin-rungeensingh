@@ -8,13 +8,13 @@ import DashCompo from "./DashCompo";
 
 const Dashboard = () => {
   const navigation = useNavigate();
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!token) {
-      navigation("/DashCompo");
-    }
-  }, [navigation, token]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigation("/DashCompo");
+  //   }
+  // }, [navigation, token]);
 
   return (
     <div className="flex h-screen bg-gray-100 text-gray-800">

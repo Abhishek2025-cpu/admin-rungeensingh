@@ -70,157 +70,131 @@ const Sidebar = () => {
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex flex-col space-y-3 p-6 overflow-y-auto">
-          {/* Admin Profile */}
-          <NavLink
-            to="/AuthorInfo"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <User size={18} /> Author Info
-          </NavLink>
+    {/* Navigation */}
+<nav className="flex flex-col space-y-3 p-6 overflow-y-auto">
+  {/* Admin Profile */}
+  <NavLink
+    to="/dashboard/AuthorInfo"
+    className={({ isActive }) =>
+      isActive ? activeClass : inactiveClass
+    }
+  >
+    <User size={18} /> Author Info
+  </NavLink>
 
-          {/* Dashboard */}
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <Home size={18} /> Dashboard
-          </NavLink>
+  {/* Dashboard */}
+  <NavLink
+    to="/dashboard"
+    className={({ isActive }) =>
+      isActive ? activeClass : inactiveClass
+    }
+  >
+    <Home size={18} /> Dashboard
+  </NavLink>
 
-          {/* Category Dropdown */}
-          <div>
-            <button
-              onClick={() => handleToggle("category")}
-              className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium"
-            >
-              <span className="flex items-center gap-3">
-                <Layers size={18} /> Category
-              </span>
-              {currentOpen === "category" ? (
-                <ChevronUp size={18} />
-              ) : (
-                <ChevronDown size={18} />
-              )}
-            </button>
-            {currentOpen === "category" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <NavLink
-                  to="/AddCategory"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inactiveClass
-                  }
-                >
-                  ➕ Add Category
-                </NavLink>
-                <NavLink
-                  to="/ViewCategory"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inactiveClass
-                  }
-                >
-                  👁 View Category
-                </NavLink>
-              </div>
-            )}
-          </div>
+  {/* Category Dropdown */}
+  <div>
+    <button
+      onClick={() => handleToggle("category")}
+      className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium"
+    >
+      <span className="flex items-center gap-3">
+        <Layers size={18} /> Category
+      </span>
+      {currentOpen === "category" ? (
+        <ChevronUp size={18} />
+      ) : (
+        <ChevronDown size={18} />
+      )}
+    </button>
+    {currentOpen === "category" && (
+      <div className="ml-4 mt-2 space-y-2">
+        <NavLink
+          to="/dashboard/AddCategory"
+          className={({ isActive }) =>
+            isActive ? activeClass : inactiveClass
+          }
+        >
+          ➕ Add Category
+        </NavLink>
+        <NavLink
+          to="/dashboard/ViewCategory"
+          className={({ isActive }) =>
+            isActive ? activeClass : inactiveClass
+          }
+        >
+          👁 View Category
+        </NavLink>
+      </div>
+    )}
+  </div>
 
-          {/* Book Dropdown */}
-          <div>
-            <button
-              onClick={() => handleToggle("book")}
-              className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium"
-            >
-              <span className="flex items-center gap-3">
-                <BookOpen size={18} /> Book
-              </span>
-              {currentOpen === "book" ? (
-                <ChevronUp size={18} />
-              ) : (
-                <ChevronDown size={18} />
-              )}
-            </button>
-            {currentOpen === "book" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <NavLink
-                  to="/Addbook"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inactiveClass
-                  }
-                >
-                  ➕ Add Book
-                </NavLink>
-                <NavLink
-                  to="/Viewbook"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inactiveClass
-                  }
-                >
-                  👁 View Book
-                </NavLink>
-              </div>
-            )}
-          </div>
+  {/* Book Dropdown */}
+  <div>
+    <button
+      onClick={() => handleToggle("book")}
+      className="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-blue-50 hover:text-blue-700 text-gray-700 font-medium"
+    >
+      <span className="flex items-center gap-3">
+        <BookOpen size={18} /> Book
+      </span>
+      {currentOpen === "book" ? (
+        <ChevronUp size={18} />
+      ) : (
+        <ChevronDown size={18} />
+      )}
+    </button>
+    {currentOpen === "book" && (
+      <div className="ml-4 mt-2 space-y-2">
+        <NavLink
+          to="/dashboard/Addbook"
+          className={({ isActive }) =>
+            isActive ? activeClass : inactiveClass
+          }
+        >
+          ➕ Add Book
+        </NavLink>
+        <NavLink
+          to="/dashboard/Viewbook"
+          className={({ isActive }) =>
+            isActive ? activeClass : inactiveClass
+          }
+        >
+          👁 View Book
+        </NavLink>
+      </div>
+    )}
+  </div>
 
-          {/* Reviews */}
-          {/* <NavLink
-            to="/Review"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <Star size={18} /> Reviews
-          </NavLink> */}
+  {/* Orders */}
+  <NavLink
+    to="/dashboard/Orders"
+    className={({ isActive }) =>
+      isActive ? activeClass : inactiveClass
+    }
+  >
+    <ShoppingCart size={18} /> Orders
+  </NavLink>
 
-          {/* Orders */}
-          <NavLink
-            to="/Orders"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <ShoppingCart size={18} /> Orders
-          </NavLink>
+  {/* Extra Items */}
+  <NavLink
+    to="/dashboard/smtp-settings"
+    className={({ isActive }) =>
+      isActive ? activeClass : inactiveClass
+    }
+  >
+    <Send size={18} /> SMTP Settings
+  </NavLink>
 
-          {/* Extra Items */}
-          <NavLink
-            to="/smtp-settings"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <Send size={18} /> SMTP Settings
-          </NavLink>
-          {/* <NavLink
-            to="/push-notifications"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <Bell size={18} /> Push Notifications
-          </NavLink> */}
-          {/* <NavLink
-            to="/newsletters"
-            className={({ isActive }) =>
-              isActive ? activeClass : inactiveClass
-            }
-          >
-            <Mail size={18} /> Newsletters
-          </NavLink> */}
+  {/* Logout */}
+  <button
+    onClick={handleLogout}
+    className="flex items-center gap-3 mt-6 px-4 py-2 text-left rounded bg-red-100 text-red-600 hover:bg-red-200 font-semibold"
+  >
+    <LogOut size={18} /> Logout
+  </button>
+</nav>
 
-          {/* Logout */}
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 mt-6 px-4 py-2 text-left rounded bg-red-100 text-red-600 hover:bg-red-200 font-semibold"
-          >
-          
-            <LogOut size={18} /> Logout
-          </button>
-        </nav>
       </aside>
     </>
   );
